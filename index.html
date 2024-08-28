@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="https://cdn.tailwindcss.com"></script>
+    <title>Paint 95 con Canvas</title>
+</head>
+<body class="bg-zinc-900 box-border m-0 p-16"  style="font-family: Arial, Helvetica, sans-serif;">
+
+    <h1 class="flex items-center justify-center text-red-700 text-xl gap-3 ">
+        <img src="icons/icon.png" alt="paint icon"> Paint 
+    </h1>
+    
+<div id="container" class="border-2 max-w-md ">
+    <header class="bg-gray-400 p-2" id="header">
+            <style>
+                button { 
+                    border: 0;
+                    margin-right: 10px;
+                    background: transparent;
+                    &:hover { 
+                        
+                        box-shadow: 1px 1px black,
+                        inset -1px -1px gray,
+                        inset 1px 1px white
+                        
+                    }
+                }
+                
+                aside
+                {  width: 52px;
+                    padding-top: 2px;
+                    grid-area: aside;
+
+                    nav{ 
+                        display: flex;
+                        flex-wrap: wrap;
+                    }
+                    
+                    button { 
+
+                    width: 24px;
+                    height: 24px;
+                    background: #bdbdbd url('./icons/draw.png')no-repeat center;
+                border: 1px solid #000;
+                border: 1.5px solid #eee;
+                border-right-color:#000;
+                border-bottom-color: #000;
+                
+                &.active { 
+                     border-color: #000;
+                     border-right-color:#eee;
+                  border-bottom-color: #eee;
+                }
+                }
+            }
+
+                #erase-btn { 
+                    background-image: url('./icons/erase.png');
+                }
+                #rectangle-btn {
+                    background-image: url('./icons/rectangle.png');
+
+                }
+
+                #ellipse-btn {
+                    background-image: url('./icons/ellipse.png');
+                }
+
+                #picker-btn {
+                    background-image: url(./icons/picker.png);
+                }
+
+                #clear-btn { 
+                    background-image: url(./icons/trash.png);
+                    background-size: 18px;
+                }
+
+                #container { 
+                    display: grid;
+                    grid-template-areas: 
+                    "header header header"
+                    "aside main main"
+                    "footer footer footer"
+                    ;
+                }
+                #header { 
+                    grid-area: header;
+                }
+                #main { 
+                    grid-area: main;
+                }
+                footer {
+                    grid-area: footer;
+                }
+            </style>
+
+        <button>File</button>
+        <button>Edit</button>
+        <button>View</button>
+        <button>Image</button>
+        <button>Options</button>
+        <button>Help</button>
+    </header>
+
+    <aside class="bg-gray-400 p-2 w-12  ">
+        <nav class="flex-wrap ">
+            <button class="active " id="draw-btn" title="Pincel"></button>
+            <button id="erase-btn" title="Borrar"></button>
+            <button id="rectangle-btn" title="Rectangulo"></button>
+            <button id="ellipse-btn" title="elipse"></button>
+            <button id="picker-btn" title="Seleccionar"></button>
+            <button id="clear-btn" title="Borrar"></button>
+        </nav>
+
+    
+    </aside>
+    <main class="p-14 " id="main">
+        <canvas id="canvas" class="bg-white w-72 ">
+
+        </canvas>
+    </main>
+    <footer class="bg-gray-400">
+        <input type="color" id="color-picker" value="#000000">
+    </footer>
+</div>
+    <script type="module" src="index.js"></script>
+</body>
+</html>
