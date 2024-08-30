@@ -18,6 +18,7 @@ const $clearBtn = document.getElementById("clear-btn");
 const $drawBtn = document.getElementById("draw-btn");
 const $rectangleBtn = document.getElementById("rectangle-btn");
 const $eraseBtn = document.getElementById('erase-btn')
+const $pickeBtn = document.getElementById('picker-btn')
 
 // Estado
 let isDrawing = false;
@@ -42,9 +43,8 @@ $colorPicker.addEventListener('change', handleChangeColor);
 $clearBtn.addEventListener('click', clearCanvas);
 $rectangleBtn.addEventListener('click', () => setMode(MODES.RECTANGLE));
 $drawBtn.addEventListener('click', () => setMode(MODES.DRAW));
-$eraseBtn.addEventListener('click', () => {
-setMode(MODES.ERASE) 
-})
+$eraseBtn.addEventListener('click', () => {setMode(MODES.ERASE) });
+
 
 
 
@@ -159,6 +159,7 @@ function setMode(newMode) {
         ctx.globalCompositeOperation = "destination-out"
         return
     }
+   
 }
 
 // Función para obtener las coordenadas del evento, tanto en dispositivos táctiles como no táctiles
