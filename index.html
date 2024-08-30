@@ -3,128 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Paint 95 con Canvas</title>
 </head>
-<body class="bg-zinc-900 box-border m-0 p-16"  style="font-family: Arial, Helvetica, sans-serif;">
+<body class="bg-zinc-900 m-0 p-0 flex justify-center items-center min-h-screen w-full h-full">
 
-    <h1 class="flex items-center justify-center text-red-700 text-xl gap-3 ">
-        <img src="icons/icon.png" alt="paint icon"> Paint 
-    </h1>
-    
-<div id="container" class="border-2 max-w-md ">
-    <header class="bg-gray-400 p-2" id="header">
-            <style>
-                button { 
-                    border: 0;
-                    margin-right: 10px;
-                    background: transparent;
-                    &:hover { 
-                        
-                        box-shadow: 1px 1px black,
-                        inset -1px -1px gray,
-                        inset 1px 1px white
-                        
-                    }
-                }
-                
-                aside
-                {  width: 52px;
-                    padding-top: 2px;
-                    grid-area: aside;
+    <style>
+        .active { 
+            border-color:#000;
+            border-right-color: #eee;
+            border-bottom-color: #eee;
+        }
+    </style>
+    <div class="border-2 border-gray-700 bg-zinc-800 p-4 md:p-6 rounded-lg shadow-lg w-full h-full max-w-full max-h-full">
+        <h1 class="flex items-center justify-center text-red-500 text-xl md:text-2xl gap-3 mb-4">
+            <img src="icons/icon.png" alt="paint icon" class="w-6 h-6 md:w-8 md:h-8"> Paint
+        </h1>
+        
+        <div id="container" class="grid grid-cols-1 md:grid-cols-[auto_1fr] grid-rows-[auto_1fr_auto] gap-1 h-full">
+            <header class="bg-gray-400 p-2 col-span-1 md:col-span-2 rounded-md shadow-inner" id="header">
+                <div class="flex flex-wrap justify-center md:justify-start space-x-2">
+                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">File</button>
+                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">Edit</button>
+                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">View</button>
+                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">Image</button>
+                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">Options</button>
+                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">Help</button>
+                </div>
+            </header>
 
-                    nav{ 
-                        display: flex;
-                        flex-wrap: wrap;
-                    }
-                    
-                    button { 
+            <aside class="bg-gray-500 p-2 rounded-md shadow-inner flex flex-row md:flex-col items-center justify-center md:space-y-2 space-x-2 md:space-x-0" id="aside">
+                <button id="draw-btn" title="Pincel" class="active w-8 h-8 bg-gray-300 border border-gray-700 rounded bg-[url('./icons/draw.png')] bg-center bg-no-repeat"></button>
+                <button id="erase-btn" title="Borrar" class="w-8 h-8 bg-gray-300 border border-gray-700 rounded hover:bg-gray-400 bg-[url('./icons/erase.png')] bg-center bg-no-repeat"></button>
+                <button id="rectangle-btn" title="Rectángulo" class="w-8 h-8 bg-gray-300 border border-gray-700 rounded hover:bg-gray-400 bg-[url('./icons/rectangle.png')] bg-center bg-no-repeat"></button>
+                <button id="ellipse-btn" title="Elipse" class="w-8 h-8 bg-gray-300 border border-gray-700 rounded hover:bg-gray-400 bg-[url('./icons/ellipse.png')] bg-center bg-no-repeat"></button>
+                <button id="picker-btn" title="Seleccionar" class="w-8 h-8 bg-gray-300 border border-gray-700 rounded hover:bg-gray-400 bg-[url('./icons/picker.png')] bg-center bg-no-repeat"></button>
+                <button id="clear-btn" title="Borrar" class="w-8 h-8 bg-gray-300 border border-gray-700 rounded hover:bg-gray-400 bg-[url('./icons/trash.png')] bg-center bg-no-repeat bg-cover"></button>
+            </aside>
 
-                    width: 24px;
-                    height: 24px;
-                    background: #bdbdbd url('./icons/draw.png')no-repeat center;
-                border: 1px solid #000;
-                border: 1.5px solid #eee;
-                border-right-color:#000;
-                border-bottom-color: #000;
-                
-                &.active { 
-                     border-color: #000;
-                     border-right-color:#eee;
-                  border-bottom-color: #eee;
-                }
-                }
-            }
+            <main class="p-2 sm:p-4 bg-gray-100 flex justify-center items-center rounded-md shadow-inner h-full w-full" id="main">
+                <canvas id="canvas" class="bg-white w-full h-full border border-gray-300 rounded"></canvas>
+            </main>
 
-                #erase-btn { 
-                    background-image: url('./icons/erase.png');
-                }
-                #rectangle-btn {
-                    background-image: url('./icons/rectangle.png');
+            <footer class="bg-gray-500 p-2 col-span-1 md:col-span-2 flex rounded-md shadow-inner">
+                <input type="color" id="color-picker" value="#000000" class="p-2 border rounded-md shadow">
+            </footer>
+        </div>
+    </div>
 
-                }
-
-                #ellipse-btn {
-                    background-image: url('./icons/ellipse.png');
-                }
-
-                #picker-btn {
-                    background-image: url(./icons/picker.png);
-                }
-
-                #clear-btn { 
-                    background-image: url(./icons/trash.png);
-                    background-size: 18px;
-                }
-
-                #container { 
-                    display: grid;
-                    grid-template-areas: 
-                    "header header header"
-                    "aside main main"
-                    "footer footer footer"
-                    ;
-                }
-                #header { 
-                    grid-area: header;
-                }
-                #main { 
-                    grid-area: main;
-                }
-                footer {
-                    grid-area: footer;
-                }
-            </style>
-
-        <button>File</button>
-        <button>Edit</button>
-        <button>View</button>
-        <button>Image</button>
-        <button>Options</button>
-        <button>Help</button>
-    </header>
-
-    <aside class="bg-gray-400 p-2 w-12  ">
-        <nav class="flex-wrap ">
-            <button class="active " id="draw-btn" title="Pincel"></button>
-            <button id="erase-btn" title="Borrar"></button>
-            <button id="rectangle-btn" title="Rectangulo"></button>
-            <button id="ellipse-btn" title="elipse"></button>
-            <button id="picker-btn" title="Seleccionar"></button>
-            <button id="clear-btn" title="Borrar"></button>
-        </nav>
-
-    
-    </aside>
-    <main class="p-14 " id="main">
-        <canvas id="canvas" class="bg-white w-72 ">
-
-        </canvas>
-    </main>
-    <footer class="bg-gray-400">
-        <input type="color" id="color-picker" value="#000000">
-    </footer>
-</div>
     <script type="module" src="index.js"></script>
 </body>
 </html>
