@@ -29,6 +29,29 @@
             max-height: 100vh;
             overflow: hidden;
         }
+        .toolbar button {
+            width: 40px;
+            height: 40px;
+            background-color: #e5e7eb;
+            border: 2px solid #374151;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .toolbar button:hover {
+            background-color: #d1d5db;
+        }
+        .toolbar button.active {
+            border-color: #000;
+            background-color: #d1d5db;
+        }
+        .toolbar svg {
+            width: 24px;
+            height: 24px;
+            color: #374151;
+        }
     </style>
 </head>
 <body class="bg-zinc-900">
@@ -39,29 +62,49 @@
         </h1>
         
         <div id="container" class="grid grid-cols-1 md:grid-cols-[auto_1fr] grid-rows-[auto_1fr_auto] ">
-            <header class="bg-gray-400 p-2 col-span-1 md:col-span-2 shadow-inner" id="header">
-                <div class="flex flex-wrap justify-center md:justify-start space-x-2">
-                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">File</button>
-                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">Edit</button>
-                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">View</button>
-                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">Image</button>
-                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">Options</button>
-                    <button class="bg-gray-300 text-sm px-3 py-1 rounded-md hover:bg-gray-400 transition">Help</button>
+            <header class="bg-transparent p-2 col-span-1 md:col-span-2 shadow-inner" id="header">
+                <div class="toolbar flex justify-center space-x-2">
+                    <button id="draw-btn" title="Pincel" class="active">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" />
+                          </svg>
+                    </button>
+                    <button id="erase-btn" title="Borrar">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 7.5A2.25 2.25 0 0 1 7.5 5.25h9a2.25 2.25 0 0 1 2.25 2.25v9a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-9Z" />
+                          </svg>
+                          
+                    </button>
+                    <button id="rectangle-btn" title="Rectángulo">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <rect width="18" height="12" x="3" y="6" rx="2" ry="2" />
+                        </svg>
+                    </button>
+                    <button id="clear-btn" title="Borrar Todo">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                          </svg>
+                          
+                    </button>
+
+                    <button id="arrow-btn" title="Flecha">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                    
                 </div>
             </header>
+              <aside class="bg-transparent p-2  shadow-inner flex flex-row md:flex-col items-center justify-center md:space-y-2 space-x-2 md:space-x-0" id="aside">
 
-            <aside class="bg-gray-400 p-2  shadow-inner flex flex-row md:flex-col items-center justify-center md:space-y-2 space-x-2 md:space-x-0" id="aside">
-                <button id="draw-btn" title="Pincel" class="active w-8 h-8 bg-gray-300 border border-gray-700 rounded bg-[url('./icons/draw.png')] bg-center bg-no-repeat"></button>
-                <button id="erase-btn" title="Borrar" class="w-8 h-8 bg-gray-300 border border-gray-700 rounded hover:bg-gray-400 bg-[url('./icons/erase.png')] bg-center bg-no-repeat"></button>
-                <button id="rectangle-btn" title="Rectángulo" class="w-8 h-8 bg-gray-300 border border-gray-700 rounded hover:bg-gray-400 bg-[url('./icons/rectangle.png')] bg-center bg-no-repeat"></button>
-                <button id="clear-btn" title="Borrar" class="w-8 h-8 bg-gray-300 border border-gray-700 rounded hover:bg-gray-400 bg-[url('./icons/trash.png')] bg-center bg-no-repeat bg-cover"></button>
             </aside>
 
-            <main class="p-2 sm:p-4 bg-gray-100 flex justify-center items-center  shadow-inner w-full h-full" id="main">
+
+            <main class="p-2 sm:p-4 bg-gray-100 flex justify-center items-center shadow-inner w-full h-full" id="main">
                 <canvas id="canvas" class="bg-white w-full h-full border border-gray-300 rounded"></canvas>
             </main>
 
-            <footer class="bg-gray-400 p-2 col-span-1 md:col-span-2 flex shadow-inner">
+            <footer class="bg-transparent p-2 col-span-1 md:col-span-2 flex justify-center md:justify-end shadow-inner">
                 <input type="color" id="color-picker" value="#000000" class="p-2 border rounded-md shadow">
             </footer>
         </div>
